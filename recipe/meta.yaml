@@ -10,16 +10,19 @@ source:
   sha256: 62cd2099b29188c92493c2940ee79d1bf2f2619a71721664e5a98ec2faa58237
 
 build:
-  noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
+  skip: True  # [py<36]
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
+
   run:
-    - python >=3.6
+    - python
     - marshmallow >=3.0.0,<4.0.0
 
 test:
