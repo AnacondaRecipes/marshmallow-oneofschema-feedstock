@@ -41,7 +41,13 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Marshmallow library extension that allows schema (de)multiplexing
-
+  description: |
+    This library adds a special kind of schema that actually multiplexes other schemas based on object type. 
+    When serializing values, it uses get_obj_type() method to get object type name. Then it uses type_schemas 
+    name-to-Schema mapping to get schema for that particular object type, serializes object using that schema and
+    adds an extra field with name of object type. Deserialization is reverse.
+  dev_url: https://github.com/marshmallow-code/marshmallow-oneofschema
+  doc_url: https://marshmallow.readthedocs.io
 extra:
   recipe-maintainers:
     - dhirschfeld
