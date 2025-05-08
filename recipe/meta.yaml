@@ -1,33 +1,39 @@
 {% set name = "marshmallow-oneofschema" %}
-{% set version = "3.0.1" %}
+{% set version = "3.2.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name | lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 62cd2099b29188c92493c2940ee79d1bf2f2619a71721664e5a98ec2faa58237
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/marshmallow_oneofschema-{{ version }}.tar.gz
+  sha256: c06c8d9f14d51ffff152d66d85bd5f27d55cff10752a3b1f8c1f948bf5f597a0
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
-  skip: True  # [py<36]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: True  # [py<39]
 
 requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
-
+    - flit-core
   run:
     - python
-    - marshmallow >=3.0.0,<4.0.0
+    - marshmallow >=3.0.0,<5.0.0
 
 test:
+  source_files:
+    - tests
   imports:
     - marshmallow_oneofschema
+  requires:
+    - pip
+    - pytest
+  commands:
+    - pip check
+    - pytest -vv tests
 
 about:
   home: https://github.com/marshmallow-code/marshmallow-oneofschema
